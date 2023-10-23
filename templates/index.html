@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komplimente für Lena ♥</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fcfefc;
+        }
+        h1 {
+            color: #000;
+        }
+        button {
+            background-color: #C41E3A;
+            color: #fff;
+            border-radius: 4px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #loading{
+            justify-content: center;
+            align-items: center;
+        }
+        #output {
+            font-size: 30px;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Komplimente für Lena ♥</h1>
+    <button id="getCustomTextButton">Gib' mir ein Kompliment!</button>
+    <div id="loading" style="display:none">
+        <img src="https://gifdb.com/images/high/cute-little-chick-chicken-dance-p0uss6sgqf9ipjt8.gif" alt="Loading..." />
+    </div>
+    <p id="output"></p>
+
+    <script>
+        $(document).ready(function() {
+            $('#getCustomTextButton').click(function() {
+                $('#loading').show();
+                $('#output').empty();
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/get_custom_compliment',
+                    success: function(data) {
+                        $('#output').text(data.custom_text);
+                    },
+                    complete: function() {
+                        $('#loading').hide(); // Verberge die Ladeanzeige nach dem Abschluss des API-Aufrufs
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
