@@ -6,46 +6,166 @@
     <title>Komplimente für Lena ♥</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        svg {
+  width: 100vw;
+  height: 100vh;
+}
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #fcfefc;
+            overflow: hidden;
         }
+      .container {
+      background-color:rgba(255,255,255,.6);
+      border-radius:.6em;
+      box-shadow:0 0 .5em rgba(0,0,0,.25);
+      box-sizing:border-box;
+      padding:3vmin;
+      text-align:center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+
+    }
+
         h1 {
             color: #000;
         }
-        button {
-            background-color: #C41E3A;
-            color: #fff;
-            border-radius: 4px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
+
+            /* CSS */
+    .button {
+      appearance: none;
+      background-color: #FAFBFC;
+      border: 1px solid rgba(27, 31, 35, 0.15);
+      border-radius: 6px;
+      box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+      box-sizing: border-box;
+      color: #24292E;
+      cursor: pointer;
+      display: inline-block;
+      font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      list-style: none;
+      padding: 6px 16px;
+      position: relative;
+      transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      white-space: nowrap;
+      word-wrap: break-word;
+    }
+
+    .button:hover {
+      background-color: #F3F4F6;
+      text-decoration: none;
+      transition-duration: 0.1s;
+    }
+
+    .button:disabled {
+      background-color: #FAFBFC;
+      border-color: rgba(27, 31, 35, 0.15);
+      color: #959DA5;
+      cursor: default;
+    }
+
+    .button:active {
+      background-color: #EDEFF2;
+      box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+      transition: none 0s;
+    }
+
+    .button:focus {
+      outline: 1px transparent;
+    }
+
+    .button:before {
+      display: none;
+    }
+
+    .button:-webkit-details-marker {
+      display: none;
+    }
+
         #loading{
             justify-content: center;
             align-items: center;
         }
         #output {
-            font-size: 30px;
-            margin-top: 100px;
+            font-size: 14px;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
+<div>
+    <svg id="hearts" viewBox="-600 -400 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <symbol  id="heart" viewBox="-69 -16 138 138">
+    <path d="M0,12
+             C 50,-30 110,50  0,120
+             C-110,50 -50,-30 0,12z"/>
+    </symbol>
+  </defs>
+        <div class="container">
     <h1>Komplimente für Lena ♥</h1>
-    <button id="getCustomTextButton">Gib' mir ein Kompliment!</button>
-    <div id="loading" style="display:none">
-        <img src="https://gifdb.com/images/high/cute-little-chick-chicken-dance-p0uss6sgqf9ipjt8.gif" alt="Loading..." />
+            <p id="output"></p>
+            <div id="loading" style="display:none">
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExajQ2eTliOHcxZ3JqdzdnYXh0dWtwNnM4c2ltOG4zNHA3dWN2eWx3ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/mFTRCmlZgMEr5CHmOV/giphy.gif" alt="Loading..." />
     </div>
-    <p id="output"></p>
+
+    <button id="button" class="button">Gib' mir ein Kompliment!</button>
+
+
+        </div>
+
+</div>
 
     <script>
+    const colors = ["#e03776","#8f3e98","#4687bf","#3bab6f","#f9c25e","#f47274"];
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const SVG_XLINK = "http://www.w3.org/1999/xlink";
+
+let heartsRy = []
+
+function useTheHeart(n){
+  let use = document.createElementNS(SVG_NS, 'use');
+  use.n = n;
+  use.setAttributeNS(SVG_XLINK, 'xlink:href', '#heart');
+  use.setAttributeNS(null, 'transform', `scale(${use.n})`);
+  use.setAttributeNS(null, 'fill', colors[n%colors.length]);
+  use.setAttributeNS(null, 'x', -69);
+  use.setAttributeNS(null, 'y', -69);
+  use.setAttributeNS(null, 'width', 138);
+  use.setAttributeNS(null, 'height', 138);
+
+  heartsRy.push(use)
+  hearts.appendChild(use);
+}
+
+for(let n = 18; n >= 0; n--){useTheHeart(n)}
+
+function Frame(){
+  window.requestAnimationFrame(Frame);
+  for(let i = 0; i < heartsRy.length; i++){
+    if(heartsRy[i].n < 18){heartsRy[i].n +=.01
+     }else{
+     heartsRy[i].n = 0;
+     hearts.appendChild(heartsRy[i])
+    }
+    heartsRy[i].setAttributeNS(null, 'transform', `scale(${heartsRy[i].n})`);
+  }
+}
+
+Frame()
+
         $(document).ready(function() {
-            $('#getCustomTextButton').click(function() {
+            $('#button').click(function() {
                 $('#loading').show();
                 $('#output').empty();
                 $.ajax({
