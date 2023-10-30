@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #333;
+}
+
+.container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    background-color: #222;
+    border: 2px solid #fff;
+}
+
+.score {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: aqua;
+}
+
+.snake {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center;
+}
+
+.food {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat:no-repeat;
+    background-position: center;
+}

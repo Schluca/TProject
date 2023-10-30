@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spiel für Lena</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='snake/snake.css') }}">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="snake" id="snakeHead" style="background-image: url('{{ url_for('static', filename='snake/head.png') }}"></div>
+        <div class="food" id="snakeFood" style="background-image: url('{{ url_for('static', filename='snake/head2.png') }}"></div>
+        <div class="score" id="kissScore"></div>
+    </div>
+    <script src="{{ url_for('static', filename='snake/snake.js') }}"></script>
+</body>
+</html>
